@@ -1,0 +1,156 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #FCE4EC;
+    color: #000000;
+}
+
+/* Header */
+.nav {
+    background-color: #F48FB1;
+    color: white;
+    margin: 50px 50px 50px;
+    padding: 15px;
+    text-align: center;
+}
+
+.nav h1{
+    text-transform:uppercase;
+}
+
+.nav_title {
+    margin: 0;
+    font-size: 3rem;
+}
+
+/* Main container */
+.container-list {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 70px;
+    margin-right: 70px;
+    padding: 25px;
+    gap: 50px;
+}
+
+/* Formulario */
+.form {
+    flex: 1;
+    max-width: 400px;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+.form h2 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: #FF4081;
+    text-align: center;
+}
+
+.form_container-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.form_input {
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    margin: 5px;
+}
+
+.form_input:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+.form_button {
+    padding: 0.8rem;
+    font-size: 1rem;
+    color: white;
+    background-color: #eb2e67;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.form_button:hover {
+    background-color:  #eb2e67e3;
+}
+
+/* Hero section */
+.hero {
+    flex: 2;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hero-blank {
+    text-align: center;
+    font-size: 1rem;
+    color: #888;
+    margin-bottom: 1rem;
+}
+
+.hero-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.card_task {
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card_task p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.card_task span {
+    display: block;
+    margin-top: 0.5rem;
+    color: #555;
+}
+
+.card-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.card-buttons button {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.card-buttons button:first-child {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.card-buttons button:last-child {
+    background-color: #f44336;
+    color: white;
+}
+
+.card-buttons button:hover {
+    opacity: 0.9;
+}
