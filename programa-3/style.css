@@ -111,11 +111,12 @@ body {
 
 .card_task {
     background-color: #f9f9f9;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), 
+                background-color 0.8s ease;
     padding: 1rem;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
+  }
 .card_task p {
     margin: 0;
     font-weight: bold;
@@ -128,9 +129,9 @@ body {
 }
 
 .card_task:hover {
-    transition: transform 0.5s ease-in-out; /* Suaviza la transición */
-    transform: scale(1.1); /* Aumenta el tamaño en un 10% */
-}
+    transform: scale(1.05);
+    background-color: #fddbfcb6;
+  }
 
 
 .card-buttons {
