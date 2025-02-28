@@ -161,3 +161,35 @@ body {
 .card-buttons button:hover {
     opacity: 0.9;
 }
+
+ /* Estilos adicionales para estados de tareas */
+ .task-pending {
+    border-left: 5px solid #ffcc80 !important;
+    background-color: rgba(255, 204, 128, 0.1);
+  }
+  .task-completed {
+    border-left: 5px solid #a5d6a7 !important;
+    background-color: rgba(165, 214, 167, 0.1);
+  }
+  .card-buttons button {
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    margin: 0 5px;
+    cursor: pointer;
+    color: white;
+    transition: transform 0.2s;
+  }
+  .card-buttons button:hover {
+    transform: scale(1.1);
+  }
+  .complete-btn {
+    background-color: #ffb6c1; /* Rosa pastel */
+  }
+  .eliminar-btn {
+    background-color: #f48fb1; /* Rosa más oscuro */
+  }
+  .editar-btn {
+    background-color: #f8bbd0; /* Rosa claro */
+  }
