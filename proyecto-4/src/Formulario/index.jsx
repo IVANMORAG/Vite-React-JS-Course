@@ -1,48 +1,70 @@
 import React from 'react'
 
-const Formulario = () => {
-  return (
-    <>
-    <form className='felx flex-column col-9 shadow p-3 rounded m-4'>
+const Formulario = ({ setListaTareas }) => {
+    const [tarea, setTarea] = React.useState("");
+    const [descripcion, setDescripcion] = React.useState("");
 
-        <h2 className='text-center'> TO DO - LIST</h2>
+    const eventoFormulario = (evt) => {
+        evt.preventDefault();
 
-        <div className='input-group mb-3 col-12'>
+        // Crear nueva tarea
+        const nuevaTarea = {
+            titulo: tarea,
+            descripcion: descripcion,
+            status: false 
+        };
 
-            <label className='input-group-text'>
-            <i className='bi bi-list-task me-1'></i>
-            </label>
+        // Actualizar la lista de tareas
+        setListaTareas((prevTareas) => [...prevTareas, nuevaTarea]);
 
-            <input type="text" 
-                placeholder='Tarea' 
-                className='form-control'
-                required />
-        </div>
+        // 
 
-        <div className='input-group mb-3 col-12'>
+        // Limpia el formulario
+        setTarea("");
+        setDescripcion("");
+    };
 
-            <label className='input-group-text'>
-            <i className='bi bi-chat me-1'></i>
-            </label>
+    return (
+        <>
+            <form onSubmit={eventoFormulario}
+                className='flex flex-column col-9 shadow p-3 rounded mt-4'>
+                <h2 className='text-center mt-3'>To - do List</h2>
+                <div className='input-group mb-3 col-12'>
+                    <label className='input-group-text'>
+                        <i className='bi bi-list-task me-1'></i>
+                    </label>
+                    <input 
+                        type="text"
+                        placeholder='Tarea'
+                        onChange={(evt) => setTarea(evt.target.value)}
+                        value={tarea}
+                        className='form-control'
+                        required
+                    />
+                </div>
+                <div className='input-group mb-3 col-12'>
+                    <label className='input-group-text'>
+                        <i className='bi bi-chat me-1'></i>
+                    </label>
+                    <input 
+                        type="text"
+                        onChange={(evt) => setDescripcion(evt.target.value)}
+                        value={descripcion}
+                        placeholder='Desplegar app en react'
+                        className='form-control'
+                        required
+                    />
+                </div>
+                <button className='btn btn-dark col-12'>Agregar</button>
+            </form>
 
-            <input className='form-control' 
-            type="text" 
-            placeholder='Dessplegar una app en react'
-            required />
-        </div>
-
-        <button className='btn btn-primary mb-3 col-12'>Agregar </button>
-
-    </form>
-
-    <div className='d-flex justify-content-between mt-4'>
-        <button className='btn btn-outline-primary flex-grow-1 mx-2'>TODOS</button>
-        <button className='btn btn-outline-warning flex-grow-1 mx-2'>PENDIENTES</button>
-        <button className='btn btn-outline-success flex-grow-1 mx-2'>COMPLETADO</button>
-    </div>
-
-    </>
-  )
+            <div className='btn-group mt-3 col-9'>
+                <button className='btn btn-primary'>Todos</button>
+                <button className='btn btn-warning'>Pendientes</button>
+                <button className='btn btn-success'>Completado</button>
+            </div>
+        </>
+    )
 }
 
-export default Formulario
+export default Formulario;

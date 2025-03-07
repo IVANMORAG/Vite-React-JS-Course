@@ -1,29 +1,24 @@
 import React from 'react'
+import Card from './Card'
 
-function Tareas() {
-  return (
-
-    <section
-    className='flex flex-column justify-content align-items-center
-    p-4 col-9'>
-
-        <div className="card col-12 p-2 shadow--sm flex-row m-4">
-            <div className='col-8'>
-
-                <h3 className='text-primary'> Deploy </h3>
-                <p className='text-secondary'>Despejar app en Netlify</p>
-            </div>
-          
-                <button className='btn btn-outline-success col-2' >
-                    <i className=' bi-journal-check text-succes'></i>
-                </button>
-         
-        </div>
-
-        
-
+const Tareas = ({listaTareas, setListaTareas}) => {
+  return(
+    <section className='flex flex-column justify-content-center align-items-center p-4 col-9'>
+      {
+      listaTareas.map(
+        (tarea, index) => {
+          return (
+            <Card
+              key={index}
+              isComplete={tarea.status}
+              titulo={tarea.titulo}
+              descripcion={tarea.descripcion}
+            />
+          )
+        }
+      )
+    }
     </section>
-
   )
 }
 
