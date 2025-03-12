@@ -20,6 +20,14 @@ class NoteService {
   async deleteNote(id) {
     return await noteRepository.delete(id);
   }
+
+  // Nueva función para actualizar solo el estado
+  async updateStatus(id, status) {
+    if (!['complete', 'incomplete'].includes(status)) {
+      throw new Error('Invalid status');
+    }
+    return await noteRepository.update(id, { status });
+  }
 }
 
 module.exports = new NoteService();

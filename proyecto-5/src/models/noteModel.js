@@ -11,6 +11,11 @@ const noteSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  status: {
+    type: String,
+    enum: ['complete', 'incomplete'],
+    default: 'incomplete', // Valor por defecto
+  },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Note', noteSchema);

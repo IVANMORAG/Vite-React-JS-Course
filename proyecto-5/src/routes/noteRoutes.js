@@ -8,4 +8,7 @@ router.get('/:id', noteController.getById);
 router.put('/:id', noteController.update);
 router.delete('/:id', noteController.delete);
 
+// Nueva ruta para actualizar el estado
+router.patch('/:id/status', noteController.updateStatus);
+
 module.exports = router;
