@@ -27,10 +27,10 @@ const Tareas = ({ listaTareas, setListaTareas }) => {
         <Card
           key={index}
           isComplete={tarea.status}
-          titulo={tarea.titulo}
-          descripcion={tarea.descripcion}
-          onToggle={() => toggleTarea(index)} // Pasar función de toggle
-          onDelete={() => eliminarTarea(index)} // Pasar función de eliminar
+          titulo={tarea.title}
+          descripcion={tarea.description}
+          onToggle={() => toggleTarea(tarea.title)} // Pasar función de toggle
+          onDelete={() => eliminarTarea(tarea.description)} // Pasar función de eliminar
         />
       ))}
     </section>

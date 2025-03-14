@@ -1,27 +1,24 @@
-import React from 'react'
-import {URL_BACKEND} from '../common/servers'
+import React, { useState } from 'react'
+import { URL_BACKEND } from '../common/servers'
 
-const Formulario = ({ setListaTareas }) => {
-    const [tarea, setTarea] = React.useState("");
-    const [descripcion, setDescripcion] = React.useState("");
+const Formulario = ({ obtenerDatos }) => {
+    const [tarea, setTarea] = useState("");
+    const [descripcion, setDescripcion] = useState("");
 
-    const cargarDatos = async(tarea)=>{
-        const response = await fetch(URL_BACKEND,{
+    const cargarDatos = async (nuevaTarea) => {
+        const response = await fetch(URL_BACKEND, {
             method: "POST",
-            headers:{
+            headers: {
                 "Content-Type": "application/json",
-                // "Authorization": "Bearer dsfsdfs"
             },
-            body:JSON.stringify(tarea)
-        })
+            body: JSON.stringify(nuevaTarea)
+        });
 
-        if (response.status == 201){
-            alert("Tarea creada")
-            const tareaNueva = await response.json();
-            setListaTareas(tareaNueva);
+        if (response.status === 201) {  // Se cambió 200 por 201, ya que normalmente el código para "creado" es 201
+            alert("Tarea creada");
+            obtenerDatos();  // Llama a obtenerDatos para actualizar la lista de tareas desde el servidor
         }
-
-    }
+    };
 
     const eventoFormulario = (evt) => {
         evt.preventDefault();
@@ -34,8 +31,6 @@ const Formulario = ({ setListaTareas }) => {
 
         cargarDatos(nuevaTarea);
 
-        // Actualizar la lista de tareas
-        setListaTareas((prevTareas) => [...prevTareas, nuevaTarea]);
         // Limpia el formulario
         setTarea("");
         setDescripcion("");
@@ -43,8 +38,7 @@ const Formulario = ({ setListaTareas }) => {
 
     return (
         <>
-            <form onSubmit={eventoFormulario}
-                className='flex flex-column col-9 shadow p-3 rounded mt-4'>
+            <form onSubmit={eventoFormulario} className='flex flex-column col-9 shadow p-3 rounded mt-4'>
                 <h2 className='text-center mt-3'>To - do List</h2>
                 <div className='input-group mb-3 col-12'>
                     <label className='input-group-text'>
@@ -81,7 +75,7 @@ const Formulario = ({ setListaTareas }) => {
                 <button className='btn btn-success'>Completado</button>
             </div>
         </>
-    )
-}
+    );
+};
 
 export default Formulario;
