@@ -1,24 +1,41 @@
 import React from 'react'
+import {URL_BACKEND} from '../common/servers'
 
 const Formulario = ({ setListaTareas }) => {
     const [tarea, setTarea] = React.useState("");
     const [descripcion, setDescripcion] = React.useState("");
+
+    const cargarDatos = async(tarea)=>{
+        const response = await fetch(URL_BACKEND,{
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json",
+                // "Authorization": "Bearer dsfsdfs"
+            },
+            body:JSON.stringify(tarea)
+        })
+
+        if (response.status == 201){
+            alert("Tarea creada")
+            const tareaNueva = await response.json();
+            setListaTareas(tareaNueva);
+        }
+
+    }
 
     const eventoFormulario = (evt) => {
         evt.preventDefault();
 
         // Crear nueva tarea
         const nuevaTarea = {
-            titulo: tarea,
-            descripcion: descripcion,
-            status: false 
+            title: tarea,
+            description: descripcion
         };
+
+        cargarDatos(nuevaTarea);
 
         // Actualizar la lista de tareas
         setListaTareas((prevTareas) => [...prevTareas, nuevaTarea]);
-
-        // 
-
         // Limpia el formulario
         setTarea("");
         setDescripcion("");

@@ -1,9 +1,13 @@
 const express = require('express');
+const cors = require('cors'); // Importar cors
 const noteRoutes = require('./routes/noteRoutes');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
 const app = express();
+
+// Configuración de CORS
+app.use(cors());
 
 // Middleware
 app.use(express.json());
