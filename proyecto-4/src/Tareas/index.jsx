@@ -1,39 +1,101 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Card from "./Card";
+import { URL_BACKEND } from "../common/servers";
 
-const Tareas = ({ listaTareas, setListaTareas }) => {
+const Tareas = ({ listaTareas, obtenerDatos }) => {
+  const [filtro, setFiltro] = useState("todos");
+  const [tareasFiltradas, setTareasFiltradas] = useState([]);
 
-  // Cambiar estado de tarea (toggle)
-  /* 
-  Componente que permite cambiar entre dos estados,
-  como verdadero y falso, seleccionado o no.
-  */
-  const toggleTarea = (index) => {
-    const nuevasTareas = [...listaTareas];
-    nuevasTareas[index].status = !nuevasTareas[index].status;
-    setListaTareas(nuevasTareas);
+  useEffect(() => {
+    // Aplicar el filtro cuando cambie listaTareas o filtro
+    if (filtro === "todos") {
+      setTareasFiltradas(listaTareas);
+    } else if (filtro === "pendientes") {
+      setTareasFiltradas(listaTareas.filter(tarea => tarea.status === "incomplete"));
+    } else if (filtro === "completadas") {
+      setTareasFiltradas(listaTareas.filter(tarea => tarea.status === "complete"));
+    }
+  }, [listaTareas, filtro]);
+
+  // Marcar tarea como completada
+  const toggleTarea = async (id) => {
+    try {
+      const response = await fetch(`${URL_BACKEND}/${id}/status`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ status: "complete" }),
+      });
+      
+      if (response.ok) {
+        obtenerDatos(); // Recargar todas las tareas
+      } else {
+        console.error("Error al actualizar el estado de la tarea");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   // Eliminar tarea
-  const eliminarTarea = (index) => {
-    const nuevasTareas = listaTareas.filter((_, i) => i !== index); // Filtrar tareas para excluir la del índice dado
-    setListaTareas(nuevasTareas); // Actualizar el estado con la lista filtrada
+  const eliminarTarea = async (id) => {
+    try {
+      const response = await fetch(`${URL_BACKEND}/${id}`, {
+        method: "DELETE",
+      });
+      
+      if (response.ok) {
+        obtenerDatos(); // Recargar todas las tareas
+      } else {
+        console.error("Error al eliminar la tarea");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
-  
 
   return (
-    <section className="flex flex-column justify-content-center align-items-center p-4 col-9">
-      {listaTareas.map((tarea, index) => (
-        <Card
-          key={index}
-          isComplete={tarea.status}
-          titulo={tarea.title}
-          descripcion={tarea.description}
-          onToggle={() => toggleTarea(tarea.title)} // Pasar función de toggle
-          onDelete={() => eliminarTarea(tarea.description)} // Pasar función de eliminar
-        />
-      ))}
-    </section>
+    <>
+      <div className="btn-group mt-3 col-9">
+        <button 
+          className={`btn ${filtro === "todos" ? "btn-primary" : "btn-outline-primary"}`}
+          onClick={() => setFiltro("todos")}
+        >
+          Todos
+        </button>
+        <button 
+          className={`btn ${filtro === "pendientes" ? "btn-warning" : "btn-outline-warning"}`}
+          onClick={() => setFiltro("pendientes")}
+        >
+          Pendientes
+        </button>
+        <button 
+          className={`btn ${filtro === "completadas" ? "btn-success" : "btn-outline-success"}`}
+          onClick={() => setFiltro("completadas")}
+        >
+          Completado
+        </button>
+      </div>
+
+      <section className="flex flex-column justify-content-center align-items-center p-4 col-9">
+        {tareasFiltradas.length > 0 ? (
+          tareasFiltradas.map((tarea) => (
+            <Card
+              key={tarea._id}
+              id={tarea._id}
+              isComplete={tarea.status}
+              titulo={tarea.title}
+              descripcion={tarea.description}
+              onToggle={toggleTarea}
+              onDelete={eliminarTarea}
+            />
+          ))
+        ) : (
+          <p className="text-center text-muted">No hay tareas {filtro !== "todos" ? `${filtro}` : ""}</p>
+        )}
+      </section>
+    </>
   );
 };
 
