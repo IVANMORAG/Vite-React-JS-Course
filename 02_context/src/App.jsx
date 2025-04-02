@@ -1,11 +1,11 @@
 import React from 'react';
 import Button from './components/Button';
-import './index.css';
+import './index.css'; // Importamos los estilos
 
-const App = ({ darkMode }) => {
+const App = () => {
   return (
     <div className="app-container">
-      <h1>{darkMode ? 'Modo Oscuro' : 'Modo Claro'}</h1>
+      <h1>Mi App</h1>
       <Button />
     </div>
   );

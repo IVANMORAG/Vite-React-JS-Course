@@ -3,13 +3,10 @@ import React, { createContext, useState, useEffect } from 'react';
 const ThemeContext = createContext();
 
 const ThemeProvider = ({ children }) => {
-  const [darkMode, setDarkMode] = useState(() => {
-    const savedTheme = localStorage.getItem('darkMode');
-    return savedTheme ? JSON.parse(savedTheme) : false;
-  });
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('darkMode', JSON.stringify(darkMode));
+    // Aplica la clase al body solo para el botón
     document.body.className = darkMode ? 'dark-theme' : 'light-theme';
   }, [darkMode]);
 

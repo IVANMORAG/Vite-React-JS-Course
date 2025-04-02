@@ -1,52 +1,38 @@
 /* Estilos base */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', sans-serif;
-  transition: all 0.3s ease-in-out;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #ffffff; /* Fondo siempre blanco */
+  color: #000000; /* Texto siempre negro */
 }
 
-/* Estilos para el modo claro */
-.light-theme {
-  --bg-color: #ffffff;
-  --text-color: #000000;
-  --button-bg: #dddddd;
-  --button-text: #000000;
-  --button-hover: #cccccc;
-}
-
-/* Estilos para el modo oscuro */
-.dark-theme {
-  --bg-color: #333333;
-  --text-color: #ffffff;
-  --button-bg: #444444;
-  --button-text: #ffffff;
-  --button-hover: #555555;
-}
-
-/* Clase para el contenedor principal */
+/* Contenedor principal */
 .app-container {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  transition: all 0.3s ease-in-out;
 }
 
-/* Estilos para el botón */
+/* Botón con tema dinámico */
 .theme-button {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
   border: none;
   border-radius: 5px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
 
-.theme-button:hover {
-  background-color: var(--button-hover);
+/* Modo claro (botón gris) */
+.light-theme .theme-button {
+  background-color: #dddddd;
+  color: #000000;
+}
+
+/* Modo oscuro (botón negro) */
+.dark-theme .theme-button {
+  background-color: #333333;
+  color: #ffffff;
 }
