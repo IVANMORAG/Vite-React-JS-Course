@@ -29,7 +29,8 @@ const Tareas = ({ listaTareas, obtenerDatos }) => {
       });
       
       if (response.ok) {
-        obtenerDatos(); // Recargar todas las tareas
+        await obtenerDatos(); // Recargar todas las tareas
+        setFiltro("todos"); // Redirigir a "Todos" después de marcar como completa
       } else {
         console.error("Error al actualizar el estado de la tarea");
       }
@@ -46,7 +47,8 @@ const Tareas = ({ listaTareas, obtenerDatos }) => {
       });
       
       if (response.ok) {
-        obtenerDatos(); // Recargar todas las tareas
+        await obtenerDatos(); // Recargar todas las tareas
+        setFiltro("todos"); // Redirigir a "Todos" después de eliminar
       } else {
         console.error("Error al eliminar la tarea");
       }
@@ -92,7 +94,9 @@ const Tareas = ({ listaTareas, obtenerDatos }) => {
             />
           ))
         ) : (
-          <p className="text-center text-muted">No hay tareas {filtro !== "todos" ? `${filtro}` : ""}</p>
+          <p className="text-center text-muted">
+            No hay tareas {filtro !== "todos" ? (filtro === "pendientes" ? "pendientes" : "completadas") : ""}
+          </p>
         )}
       </section>
     </>
